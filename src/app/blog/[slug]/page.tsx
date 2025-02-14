@@ -1,5 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import { PortableText } from "@portabletext/react";
+import Image from "next/image";
 
 interface Category {
   title: string;
@@ -45,10 +46,12 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       {/* Author Info */}
       <div className="flex justify-center items-center gap-4 text-gray-600 mb-6">
         {post.author.image?.asset?.url && (
-          <img
+          <Image
             src={post.author.image.asset.url}
             alt={post.author.name}
             className="w-12 h-12 rounded-full border"
+            width={48}
+            height={48}
           />
         )}
         <div className="text-center">
@@ -59,10 +62,12 @@ export default async function BlogPost({ params }: { params: { slug: string } })
       
       {/* Main Image */}
       {post.mainImage?.asset?.url && (
-        <img
+        <Image
           src={post.mainImage.asset.url}
           alt={post.title}
           className="w-full rounded-lg mb-6"
+          width={1000}
+          height={1000}
         />
       )}
       
