@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { client } from "@/sanity/lib/client";
 
 
@@ -49,11 +50,12 @@ export default async function Home() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {AllBlogPosts.map((post: BlogPost) => (
             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="block group">
-              <div className="w-full rounded-lg overflow-hidden shadow-lg mb-3">
-                <img
+              <div className="w-full rounded-lg overflow-hidden shadow-lg mb-3 relative h-[300px]">
+                <Image
                   src={post.mainImage?.asset?.url}
                   alt={post.title}
-                  className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
                 />
               </div>
               <div className="text-gray-600 text-sm mb-1">

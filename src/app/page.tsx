@@ -1,14 +1,6 @@
 import { client } from "@/sanity/lib/client";
 import BlogPageClient from './components/BlogPageClient';
-
-type BlogPost = {
-  title: string;
-  slug: { current: string };
-  category: { title: string };
-  mainImage: { asset: { url: string } };
-  publishedAt: string;
-  author: { name: string };
-};
+import type { BlogPost } from '@/types/blog';
 
 // Revalidate every 60 seconds
 export const revalidate = 60;
@@ -25,6 +17,6 @@ export default async function Home() {
     author->{name}
   }`;
 
-  const posts = await client.fetch(query);
+  const posts = await client.fetch<BlogPost[]>(query);
   return <BlogPageClient posts={posts} />;
 }

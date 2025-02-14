@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 
 type BlogPost = {
@@ -57,10 +58,12 @@ export default function BlogPageClient({ posts }: { posts: BlogPost[] }) {
         {bannerPost && (
           <Link href={`/blog/${bannerPost.slug.current}`} className="block relative group">
             <div className="relative w-full h-[300px] md:h-[600px] overflow-hidden shadow-lg mb-8">
-              <img
+              <Image
                 src={bannerPost.mainImage?.asset?.url}
                 alt={bannerPost.title}
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                fill
+                priority
               />
               <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-4 text-white">
                 <p className="text-sm font-medium mb-1">{bannerPost.category?.title || "Literature & Reading"}</p>
@@ -80,11 +83,12 @@ export default function BlogPageClient({ posts }: { posts: BlogPost[] }) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {currentPosts.map((post) => (
             <Link key={post.slug.current} href={`/blog/${post.slug.current}`} className="block group">
-              <div className="w-full rounded-lg overflow-hidden shadow-lg mb-3">
-                <img
+              <div className="w-full rounded-lg overflow-hidden shadow-lg mb-3 relative h-[300px]">
+                <Image
                   src={post.mainImage?.asset?.url}
                   alt={post.title}
-                  className="w-full h-[300px] object-cover group-hover:scale-105 transition-transform duration-300"
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  fill
                 />
               </div>
               <div className="text-gray-600 text-sm mb-1">
